@@ -86,6 +86,16 @@ public class GitPATRetreiverWindow {
 
 		copyPAT.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
+				String path1 = GitPATFileAccessServiceImpl.defaultWindowsFileSystemLocation;
+				String path2 = GitPATFileAccessServiceImpl.defaultLinuxFileSystemLocation;
+				String finalPath = null;
+				if (!path1.equals("")) {
+					finalPath = path1;
+				} else if (!path2.equals("")) {
+					finalPath = path2;
+				}
+				finalPath += "/Documents/PermanentPath.txt";
+				GitPATFileAccessServiceImpl.location = finalPath;
 				GitPATFileAccessService PATService = new GitPATFileAccessServiceImpl();
 				try {
 					tokenValue = PATService.getPersonalAccessToken();
