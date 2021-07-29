@@ -1,0 +1,27 @@
+Instructions to use this application :
+
+Requirements : You must have Java installed on your machine...
+
+Step 1: You could either use an ide or maybe execute this application via command line..
+
+Step 2 (Optional): Make sure you've a file named as Github PAT.txt in your machine somewhere..
+		
+		then inside that file make sure to use this particular format to store your github PAT
+		
+		Personal Access Token : "your PAT token"
+		
+Note : eliminate "" from the above string 
+
+example : Personal Access Token : ghsdghg452hh1j23hj94j039
+
+
+Step 3: You just have to browse to your git PAT text file just once, and in future iterations
+		
+		you can directly copy the github PAT token value to your clipboard... 
+		
+		And in case you want to change your git text file location you can update the location
+		
+		and my application is smart enough to keep the track of everything..
+		
+
+Step 4 : Enjoy !

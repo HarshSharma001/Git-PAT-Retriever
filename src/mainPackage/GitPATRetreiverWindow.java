@@ -45,6 +45,32 @@ public class GitPATRetreiverWindow {
 	static String tokenValue = null;
 
 	/**
+	 * default constructor - to check whether user have already set the location of
+	 * git text file or not
+	 */
+	public GitPATRetreiverWindow() {
+		String path1 = GitPATFileAccessServiceImpl.defaultWindowsFileSystemLocation;
+		String path2 = GitPATFileAccessServiceImpl.defaultLinuxFileSystemLocation;
+		String finalPath = null;
+		if (!path1.equals("")) {
+			finalPath = path1;
+			finalPath += "/PermanentPath.txt";
+		} else if (!path2.equals("")) {
+			finalPath = path2;
+			finalPath += "/Documents/PermanentPath.txt";
+		}
+		GitPATFileAccessServiceImpl.location = finalPath;
+		try {
+			File file = new File(finalPath);
+			if (file.exists()) {
+				browseLocation.setText("Update Your Text File");
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(mainWindow, "Unkown error occured, sorry for the inconvinience!");
+		}
+	}
+
+	/**
 	 * method to - initialize main frame and it's components
 	 */
 	public static void initiateFrameWindow() {
@@ -86,16 +112,6 @@ public class GitPATRetreiverWindow {
 
 		copyPAT.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				String path1 = GitPATFileAccessServiceImpl.defaultWindowsFileSystemLocation;
-				String path2 = GitPATFileAccessServiceImpl.defaultLinuxFileSystemLocation;
-				String finalPath = null;
-				if (!path1.equals("")) {
-					finalPath = path1;
-				} else if (!path2.equals("")) {
-					finalPath = path2;
-				}
-				finalPath += "/Documents/PermanentPath.txt";
-				GitPATFileAccessServiceImpl.location = finalPath;
 				GitPATFileAccessService PATService = new GitPATFileAccessServiceImpl();
 				try {
 					tokenValue = PATService.getPersonalAccessToken();
@@ -153,6 +169,8 @@ public class GitPATRetreiverWindow {
 				bw.close();
 				fw.close();
 			}
+			file.setReadOnly();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(mainWindow, "Error : While saving the PAT file location !");
